@@ -23,7 +23,8 @@
   "author": "Khaled Al-Ansari <khaledelansari@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "toy-rx": "^1.0.0"
+    "toy-rx": "^1.0.0",
+    "zen-observable": "^0.5.1"
   },
   "devDependencies": {
     "buble": "^0.15.2",

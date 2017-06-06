@@ -1,10 +1,10 @@
-import Rx from "toy-rx";
+import Observable from "zen-observable";
 
 const http = (function() {
     function http(url, options) {
         options = options || {};
         
-        return Rx.Observable.create(observer => {
+        return new Observable(observer => {
             let request = new XMLHttpRequest();
 
             for (let i in options.headers) {
@@ -30,10 +30,14 @@ const http = (function() {
             request.open(options.method || "GET", url);
             request.send(options.body || {});
             
-            request.onreadystatechange = (e) => {
+            request.onreadystatechange = () => {
                 if (request.readyState == 4) {
                     if(request.status >= 200 && request.status < 400) {
                         observer.next(response());
+                        observer.complete();
+                    }
+                    else {
+                        observer.error(response());
                     }
                 }
             };
